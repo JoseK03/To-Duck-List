@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken"
-import { SECRECT_KEY } from "../config.js";
+import { SECRET_KEY } from "../config.js";
 
 export function createAccesToken(payload){
 
    return new Promise((resolve, reject) => {
     jwt.sign(
         payload,
-        SECRECT_KEY,
+        SECRET_KEY,
         {
             expiresIn: '1d'
         },

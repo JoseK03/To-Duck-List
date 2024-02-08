@@ -1,18 +1,14 @@
-import jwt  from "jsonwebtoken";
-import { SECRECT_KEY } from "../config.js";
+import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "../config.js";
 
-export const authRequired = (req,res, next) =>{
+export const authRequired = (req, res, next) => {
+    const { token } = req.cookies;
+    if (!token) return res.status(401).json({ message: 'No token, autorizacion denegada' });
 
-    const {token} = req.cookies
-    if(!token)
-        return res.status(401).json({message:'No token, autorizacion denegada'})
-
-        jwt.verify(token, SECRECT_KEY, (err, user) =>{
-            if(err) return res.status(401).json({message:'token invalido'})
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        if (err) return res.status(401).json({ message: 'token invalido' });
+        req.user = user;
         
-            req.user = user
-
-            next();
-        })
-    
-}
+    });
+};
+next();

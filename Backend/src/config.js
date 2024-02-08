@@ -1,1 +1,1 @@
-export const SECRECT_KEY = 'some secret key';
+export const SECRET_KEY = 'some secret key';
