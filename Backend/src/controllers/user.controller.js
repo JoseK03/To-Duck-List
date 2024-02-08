@@ -36,7 +36,7 @@ export const login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, userFound.password);
         if(!isMatch) res.status(400).json({message : 'Contraseña incorrecta'});
 
-        const token = await createAccesToken({id: userFound._id});
+        const token = await createAccessToken({id: userFound._id});
         res.cookie('token', token)
         res.json({
             id: userFound._id,
@@ -53,15 +53,6 @@ export const logout = (req,res) => {
     return res.status(200).json({message : 'Sesion finalizada, vuelva pronto.'})
 }
 
-export const profile = async (req, res) =>{
-   const userFound =await User.findById(req.user.id)
-
-   if(!userFound) return res.status(404).json({message:"Usuario no encontrado"});
-
-   return res.json({
-      id: userFound.id,
-      username : userFound.username,
-      email : userFound.email
-   })
-   
+export const profile = (req, res) => {
+    res.send('hola')
 }
