@@ -55,6 +55,22 @@ export const logout = (req,res) => {
     return res.status(200).json({message : 'Sesion finalizada, vuelva pronto.'})
 }
 
-export const profile = (req, res) => {
-    res.json({ message : 'prueba'})
+export const profile = async(req, res) => {
+
+    try {
+        const userExists = await User.exists({ _id: req.user.id });
+        if (!userExists) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+        const userFound = await User.findById(req.user.id);
+        
+        return res.status(200).json({
+            id: userFound._id,
+            username : userFound.username,
+            email: userFound.email
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message : 'Error al obtener el perfil del usuario.'})
+    }
 }
