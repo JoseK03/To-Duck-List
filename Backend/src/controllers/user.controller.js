@@ -22,7 +22,8 @@ export const registerUser = async (req,res) => {
             email: newUser.email
         });
    } catch (error) {
-    console.error(error);
+        console.error(error);
+        res.status(500).json({message : 'Ha ocurrido un error al registrar el usuario.'})
    }
 }
 
@@ -45,6 +46,7 @@ export const login = async (req, res) => {
 
     } catch (error) {
         console.error(error);
+        res.status(500).json({message : 'Ha ocurrido un error al iniciar sesión.'})
     }
 }
 
