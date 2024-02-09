@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import userRouter from './routes/user.routes.js'
 import cookieParser from 'cookie-parser';
+import taskRouter from './routes/task.routes.js';
 
 dotenv.config()
 const app = express();
@@ -13,6 +14,7 @@ app.use(cookieParser());
 
 
 app.use('/api', userRouter);
+app.use('/api',taskRouter)
 
 
 export default app;
