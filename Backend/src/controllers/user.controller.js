@@ -56,5 +56,5 @@ export const logout = (req,res) => {
 }
 
 export const profile = (req, res) => {
-    res.send('hola')
+    res.json({ message : 'prueba'})
 }

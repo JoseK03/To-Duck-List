@@ -1,13 +1,16 @@
 import {Router} from 'express';
 import { login, logout, profile, registerUser } from '../controllers/user.controller.js';
-import { authRequired } from '../middlewares/validate.token.js';
+import { authtenticateUser } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
 router.post('/register', registerUser);
 router.post('/login', login);
 router.post('/logout', logout);
-router.get('/profile', authRequired, profile)
+
+// Rutas privadas que requiren autenticación.
+router.get('/profile', authtenticateUser, profile);
+
 
 
 export default router;
